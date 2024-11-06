@@ -20,3 +20,4 @@ def get_current_version():
         ):
             version = data["tool"]["poetry"]["version"]
     return version
+

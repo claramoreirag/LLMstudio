@@ -15,9 +15,8 @@ tiktoken = "^0.7"
 python-dotenv = "^0"
 toml = "^0.10"
 llmstudio-core = "1.0.0"
+boto3 = "^1.34"
 
-[tool.poetry.group.dev.dependencies]
-llmstudio-core = { path = "../core/", develop = true }
 
 [build-system]
 requires = ["poetry-core"]
