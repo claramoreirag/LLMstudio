@@ -97,3 +97,8 @@ def setup_tracking_server():
         )
         _tracker_server_started = True
     return tracker_thread
+
+
+if __name__ == "__main__":
+    setup_tracking_server()
+

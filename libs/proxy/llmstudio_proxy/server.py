@@ -12,6 +12,7 @@ from llmstudio_core.providers.provider import provider_registry
 from llmstudio_proxy.config import ENGINE_HOST, ENGINE_PORT
 from llmstudio_proxy.utils import get_current_version
 from pydantic import BaseModel
+import register_usage_aws
 
 ENGINE_HEALTH_ENDPOINT = "/health"
 ENGINE_TITLE = "LLMstudio Proxy API"
@@ -154,13 +155,17 @@ def create_proxy_app(
 
 def run_proxy_app(started_event: Event):
     try:
-        proxy = create_proxy_app(started_event)
-        uvicorn.run(
-            proxy,
-            host=ENGINE_HOST,
-            port=ENGINE_PORT,
-            log_level="warning",
-        )
+        if register_usage_aws.registerUsage():
+            proxy = create_proxy_app(started_event)
+            uvicorn.run(
+                proxy,
+                host=ENGINE_HOST,
+                port=ENGINE_PORT,
+                log_level="warning",
+            )
+        else:
+            raise Exception("Could not register usage on AWS")
+
     except Exception as e:
         print(f"Error running LLMstudio Proxy: {e}")
 
@@ -196,3 +201,7 @@ def setup_engine_server():
         )
         _proxy_server_started = True
     return proxy_thread
+
+
+if __name__ == "__main__":
+    setup_engine_server()
