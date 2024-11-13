@@ -155,7 +155,7 @@ def create_proxy_app(
 
 def run_proxy_app(started_event: Event):
     try:
-        if register_usage_aws.registerUsage():
+        if register_usage_aws.checkoutLic():
             proxy = create_proxy_app(started_event)
             uvicorn.run(
                 proxy,
