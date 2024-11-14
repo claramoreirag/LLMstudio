@@ -37,10 +37,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: contract-service
+  name: llmstudio-proxy
   namespace: mcp
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: llmstudio-proxy
   ports:

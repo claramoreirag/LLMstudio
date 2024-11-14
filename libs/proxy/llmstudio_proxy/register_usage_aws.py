@@ -20,7 +20,6 @@ def checkoutLic():
             ],
             ClientToken=str(uuid.uuid4())
         )
-        print('Check out license successful ' + str(response))
         if(len(response['EntitlementsAllowed']) > 0 and response['EntitlementsAllowed'][0]['Value'])=='Enabled':
             return True
         else:
