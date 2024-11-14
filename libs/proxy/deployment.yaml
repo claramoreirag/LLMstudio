@@ -27,8 +27,8 @@ spec:
             - containerPort: 50001
           env:
             - name: PROD_ID
-              value: $PROD_ID
-            - name: ISSUER_FOOTPRINT
+              value: $PRODUCT_ID
+            - name: ISSUER_FT
               value: $ISSUER_FOOTPRINT
             - name: OPENAI_API_KEY
               value: $OPENAI_API_KEY
