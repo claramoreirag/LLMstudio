@@ -66,6 +66,7 @@ def create_proxy_app(
         allow_headers=["*"],
     )
 
+    @app.head(ENGINE_HEALTH_ENDPOINT)
     @app.get(ENGINE_HEALTH_ENDPOINT)
     def health_check():
         """Health check endpoint to ensure the API is running."""
