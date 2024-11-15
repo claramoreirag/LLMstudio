@@ -23,6 +23,8 @@ COPY . /proxy
 ENV PYTHONPATH=/proxy
 
 # Run the application
+EXPOSE 50001
+
 CMD ["python", "llmstudio_proxy/server.py"]
 
 
