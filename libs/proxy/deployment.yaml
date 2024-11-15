@@ -40,7 +40,7 @@ metadata:
   name: llmstudio-proxy
   namespace: mcp
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: llmstudio-proxy
   ports:
