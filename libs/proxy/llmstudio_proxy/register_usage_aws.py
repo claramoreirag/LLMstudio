@@ -17,10 +17,14 @@ def checkoutLic():
                     'Name': 'API_free',
                     'Unit': 'None'
                 },
+                {
+                    'Name': 'API_month',
+                    'Unit': 'None'
+                },
             ],
             ClientToken=str(uuid.uuid4())
         )
-        if(len(response['EntitlementsAllowed']) > 0 and response['EntitlementsAllowed'][0]['Value'])=='Enabled':
+        if len(response['EntitlementsAllowed']) > 0 and (response['EntitlementsAllowed'][0]['Value']=='Enabled' or response['EntitlementsAllowed'][1]['Value']=='Enabled'):
             return True
         else:
             print('Insufficient or expired license')
