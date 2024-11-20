@@ -2,6 +2,11 @@
 FROM python:3.11-slim
 ENV PYTHONUNBUFFERED=1
 
+ARG PRODUCT_ID
+ARG ISSUER_FOOTPRINT
+ENV PROD_ID=$PRODUCT_ID
+ENV ISSUER_FT=$ISSUER_FOOTPRINT
+
 # Install required tools and Poetry
 RUN apt-get clean && apt-get update && \
     apt-get install -y curl && \
@@ -22,9 +27,10 @@ COPY . /proxy
 # Set PYTHONPATH
 ENV PYTHONPATH=/proxy
 
+RUN pip install -e .
+
 # Run the application
 EXPOSE 50001
-
-CMD ["python", "llmstudio_proxy/server.py"]
+CMD ["llmstudio-proxy", "server"]
 
 

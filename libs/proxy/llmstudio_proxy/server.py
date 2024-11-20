@@ -12,7 +12,7 @@ from llmstudio_core.providers.provider import provider_registry
 from llmstudio_proxy.config import ENGINE_HOST, ENGINE_PORT
 from llmstudio_proxy.utils import get_current_version
 from pydantic import BaseModel
-import register_usage_aws
+from llmstudio_proxy import register_usage_aws
 
 ENGINE_HEALTH_ENDPOINT = "/health"
 ENGINE_TITLE = "LLMstudio Proxy API"
@@ -184,7 +184,7 @@ def is_server_running(host, port, path="/health"):
 def start_server_component(host, port, run_func, server_name):
     if not is_server_running(host, port):
         started_event = Event()
-        thread = Thread(target=run_func, daemon=False, args=(started_event,))
+        thread = Thread(target=run_func, daemon=True, args=(started_event,))
         thread.start()
         started_event.wait()  # wait for startup, this assumes the event is set somewhere
         return thread
@@ -206,3 +206,6 @@ def setup_engine_server():
 
 if __name__ == "__main__":
     setup_engine_server()
+
+
+
